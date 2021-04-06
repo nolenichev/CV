@@ -1,70 +1,84 @@
-$(document).ready(function() {
-  AOS.init( {
-    // uncomment below for on-scroll animations to played only once
-    // once: true  
-  });
-});
+$(document).ready(function () {
+    AOS.init({
+        // uncomment below for on-scroll animations to played only once
+        // once: true
+    })
+})
 
 // Smooth scroll for links with hashes
-$('a.smooth-scroll')
-.click(function(event) {
-  // On-page links
-  if (
-    location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-    && 
-    location.hostname == this.hostname
-  ) {
-    // Figure out element to scroll to
-    var target = $(this.hash);
-    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-    // Does a scroll target exist?
-    if (target.length) {
-      // Only prevent default if animation is actually gonna happen
-      event.preventDefault();
-      $('html, body').animate({
-        scrollTop: target.offset().top
-      }, 1000, function() {
-        // Callback after animation
-        // Must change focus!
-        var $target = $(target);
-        $target.focus();
-        if ($target.is(":focus")) { // Checking if the target was focused
-          return false;
-        } else {
-          $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-          $target.focus(); // Set focus again
-        };
-      });
+$('a.smooth-scroll').click(function (event) {
+    // On-page links
+    if (
+        location.pathname.replace(/^\//, '') ==
+            this.pathname.replace(/^\//, '') &&
+        location.hostname == this.hostname
+    ) {
+        // Figure out element to scroll to
+        var target = $(this.hash)
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']')
+        // Does a scroll target exist?
+        if (target.length) {
+            // Only prevent default if animation is actually gonna happen
+            event.preventDefault()
+            $('html, body').animate(
+                {
+                    scrollTop: target.offset().top,
+                },
+                1000,
+                function () {
+                    // Callback after animation
+                    // Must change focus!
+                    var $target = $(target)
+                    $target.focus()
+                    if ($target.is(':focus')) {
+                        // Checking if the target was focused
+                        return false
+                    } else {
+                        $target.attr('tabindex', '-1') // Adding tabindex for elements not focusable
+                        $target.focus() // Set focus again
+                    }
+                }
+            )
+        }
     }
-  }
-});
-(function () {
-  var size = 65
-  
-  $('#eng-circle').circleProgress({
-    value: .7,
-    size: size,
-    startAngle: 0,
-    fill: {
-      gradient: ["#7f53ac", "#647dee"]
-    }
-  });
-  
-  $('#ru-circle').circleProgress({
-    value: 1,
-    size: size,
-    startAngle: 0,
-    fill: {
-      gradient: ["#7f53ac", "#647dee"]
-    }
-  });
-  
-  $('#cz-circle').circleProgress({
-    value: .7,
-    size: size,
-    startAngle: 0,
-    fill: {
-      gradient: ["#7f53ac", "#647dee"]
-    }
-  });
-})();
+})
+
+// Circles
+;(function () {
+    var size = 65
+
+    $('#eng-circle').circleProgress({
+        value: 0.7,
+        size: size,
+        startAngle: 0,
+        fill: {
+            gradient: ['#7f53ac', '#647dee'],
+        },
+    })
+
+    $('#ru-circle').circleProgress({
+        value: 1,
+        size: size,
+        startAngle: 0,
+        fill: {
+            gradient: ['#7f53ac', '#647dee'],
+        },
+    })
+
+    $('#cz-circle').circleProgress({
+        value: 0.7,
+        size: size,
+        startAngle: 0,
+        fill: {
+            gradient: ['#7f53ac', '#647dee'],
+        },
+    })
+})()
+
+;(function () {
+    let header = document.querySelector('.navbar')
+
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('navbar-transparent', window.scrollY <= 0)
+    })
+})()
